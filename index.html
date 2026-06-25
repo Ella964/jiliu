@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shanghai Jiliu Agricultural</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--g:#2e7d32;--gd:#1b5e20;--gl:#4caf50;--gold:#f9a825;--bg:#f5f7f5;--w:#fff}
+body{font-family:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;color:#333;line-height:1.6}
+a{text-decoration:none;color:inherit}
+.lang-switcher{position:fixed;top:12px;right:12px;z-index:1000}
+[dir=rtl] .lang-switcher{right:auto;left:12px}
+.lang-btn{background:var(--g);color:var(--w);border:none;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:14px}
+.lang-dropdown{display:none;position:absolute;right:0;top:42px;background:var(--w);border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.15);min-width:160px}
+[dir=rtl] .lang-dropdown{right:auto;left:0}
+.lang-dropdown.show{display:block}
+.lang-option{padding:10px 16px;cursor:pointer;font-size:13px}
+.lang-option:hover{background:var(--gl);color:var(--w)}
+.lang-option.active{background:var(--g);color:var(--w)}
+.hero{min-height:100vh;background:linear-gradient(135deg,rgba(27,94,32,.88),rgba(46,125,50,.78));display:flex;align-items:center;justify-content:center;text-align:center;color:var(--w);padding:80px 20px}
+.hero h1{font-size:clamp(26px,5vw,52px);margin-bottom:16px;font-weight:700;text-shadow:0 2px 10px rgba(0,0,0,.3)}
+.hero p{font-size:clamp(15px,2.5vw,20px);margin-bottom:32px;opacity:.92;max-width:700px;margin:0 auto 32px}
+.hero-btn{display:inline-block;padding:14px 36px;background:var(--gold);color:var(--gd);border-radius:30px;font-size:17px;font-weight:600;transition:.3s}
+.hero-btn:hover{transform:translateY(-2px)}
+section{padding:80px 20px}
+.container{max-width:1100px;margin:0 auto}
+.section-title{text-align:center;font-size:clamp(22px,3.5vw,36px);color:var(--gd);margin-bottom:12px;font-weight:700}
+.section-sub{text-align:center;color:#777;margin-bottom:48px;font-size:16px}
+.about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.about-text h3{font-size:22px;color:var(--gd);margin-bottom:16px}
+.about-text p{margin-bottom:12px;color:#555}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.stat-card{background:var(--w);padding:20px;border-radius:12px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.stat-num{font-size:28px;font-weight:700;color:var(--g)}
+.stat-label{font-size:13px;color:#888;margin-top:4px}
+.about-img{background:linear-gradient(135deg,var(--gl),var(--g));border-radius:16px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:80px;color:var(--w)}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px}
+.product-card{background:var(--w);border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:.3s}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.product-icon{height:160px;display:flex;align-items:center;justify-content:center;font-size:64px}
+.p0 .product-icon{background:linear-gradient(135deg,#fff3e0,#ffe0b2)}
+.p1 .product-icon{background:linear-gradient(135deg,#fce4ec,#f8bbd0)}
+.p2 .product-icon{background:linear-gradient(135deg,#fff8e1,#ffecb3)}
+.p3 .product-icon{background:linear-gradient(135deg,#f3e5f5,#e1bee7)}
+.p4 .product-icon{background:linear-gradient(135deg,#e8f5e9,#c8e6c9)}
+.product-info{padding:20px;text-align:center}
+.product-name{font-size:18px;font-weight:600;color:var(--gd);margin-bottom:8px}
+.product-desc{font-size:13px;color:#888}
+.product-tag{display:inline-block;margin-top:10px;padding:4px 12px;background:var(--gl);color:var(--w);border-radius:12px;font-size:11px}
+.contact{background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.contact-card{background:var(--w);padding:32px;border-radius:16px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.contact-icon{font-size:40px;margin-bottom:12px}
+.contact-card h3{font-size:18px;color:var(--gd);margin-bottom:8px}
+.contact-card p{color:#666;font-size:14px}
+.contact-card a{color:var(--g);font-weight:600}
+footer{background:var(--gd);color:rgba(255,255,255,.8);text-align:center;padding:32px 20px;font-size:14px}
+footer strong{color:var(--w)}
+nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);box-shadow:0 2px 10px rgba(0,0,0,.06);padding:0 20px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-size:18px;font-weight:700;color:var(--gd);display:flex;align-items:center;gap:8px}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-size:14px;color:#555;transition:.2s;font-weight:500}
+.nav-links a:hover{color:var(--g)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--gd)}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}.nav-links{display:none;position:absolute;top:60px;left:0;right:0;background:var(--w);flex-direction:column;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.1)}.nav-links.open{display:flex}.hamburger{display:flex}.hero{min-height:80vh}section{padding:60px 16px}}
+</style>
+</head>
+<body><nav>
+<div class="nav-inner">
+<div class="nav-logo">&#127793; <span data-i18n="nav_logo">激流农业</span></div>
+<div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+<span></span><span></span><span></span>
+</div>
+<div class="nav-links">
+<a href="#hero" data-i18n="nav_home">首页</a>
+<a href="#about" data-i18n="nav_about">关于我们</a>
+<a href="#products" data-i18n="nav_products">产品</a>
+<a href="#contact" data-i18n="nav_contact">联系我们</a>
+</div>
+</div>
+</nav>
+<div class="lang-switcher">
+<button class="lang-btn" onclick="toggleLangDropdown()">&#127760; <span id="currentLang">中文</span></button>
+<div class="lang-dropdown" id="langDropdown"></div>
+</div>
+<section class="hero" id="hero">
+<div class="hero-content">
+<h1 data-i18n="hero_title">上海激流农业发展有限公司</h1>
+<p data-i18n="hero_subtitle">致力于优质农产品出口，将中国新鲜农产品带给全球市场</p>
+<a href="#products" class="hero-btn" data-i18n="hero_cta">探索我们的产品</a>
+</div>
+</section>
+<section class="about" id="about">
+<div class="container">
+<div class="section-title" data-i18n="about_title">关于我们</div>
+<p class="section-sub" data-i18n="about_sub">品质源于自然，服务遍及全球</p>
+<div class="about-grid">
+<div class="about-text">
+<h3 data-i18n="about_h3">专业的农产品出口企业</h3>
+<p data-i18n="about_p1">上海激流农业发展有限公司成立于中国上海，是一家专注于新鲜农产品出口的企业。我们与国内优质种植基地建立长期合作，严格把控从种植到出口的全过程。</p>
+<p data-i18n="about_p2">我们的产品涵盖大蒜、洋葱、胡萝卜、生姜、土豆等五大品类，品质稳定，供应充足，已出口至亚洲、欧洲、中东等多个国家和地区。</p>
+<div class="about-stats">
+<div class="stat-card"><div class="stat-num">12+</div><div class="stat-label" data-i18n="stat_lang">支持语言</div></div>
+<div class="stat-card"><div class="stat-num">50+</div><div class="stat-label" data-i18n="stat_countries">出口国家/地区</div></div>
+<div class="stat-card"><div class="stat-num">1000+</div><div class="stat-label" data-i18n="stat_tons">年出口吨数</div></div>
+<div class="stat-card"><div class="stat-num">15+</div><div class="stat-label" data-i18n="stat_years">年行业经验</div></div>
+</div>
+</div>
+<div class="about-img">&#127793;</div>
+</div>
+</div>
+</section>
+<section class="products" id="products">
+<div class="container">
+<div class="section-title" data-i18n="products_title">产品展示</div>
+<p class="section-sub" data-i18n="products_sub">精选优质农产品，品质保证</p>
+<div class="products-grid">
+<div class="product-card p0">
+<div class="product-icon">&#129367;</div>
+<div class="product-info">
+<div class="product-name" data-i18n="prod_garlic_name">大蒜</div>
+<div class="product-desc" data-i18n="prod_garlic_desc">山东金乡大蒜，品质上乘</div>
+<div class="product-tag" data-i18n="prod_fresh">新鲜直达</div>
+</div>
+</div>
+<div class="product-card p1">
+<div class="product-icon">&#127826;</div>
+<div class="product-info">
+<div class="product-name" data-i18n="prod_onion_name">洋葱</div>
+<div class="product-desc" data-i18n="prod_onion_desc">河南原阳洋葱，品质稳定</div>
+<div class="product-tag" data-i18n="prod_fresh">新鲜直达</div>
+</div>
+</div>
+<div class="product-card p2">
+<div class="product-icon">&#129357;</div>
+<div class="product-info">
+<div class="product-name" data-i18n="prod_carrot_name">胡萝卜</div>
+<div class="product-desc" data-i18n="prod_carrot_desc">寿光大棚胡萝卜，口感香甜</div>
+<div class="product-tag" data-i18n="prod_fresh">新鲜直达</div>
+</div>
+</div>
+<div class="product-card p3">
+<div class="product-icon">&#127799;</div>
+<div class="product-info">
+<div class="product-name" data-i18n="prod_ginger_name">生姜</div>
+<div class="product-desc" data-i18n="prod_ginger_desc">云南罗平生姜，辛辣纯正</div>
+<div class="product-tag" data-i18n="prod_fresh">新鲜直达</div>
+</div>
+</div>
+<div class="product-card p4">
+<div class="product-icon">&#127841;</div>
+<div class="product-info">
+<div class="product-name" data-i18n="prod_potato_name">土豆</div>
+<div class="product-desc" data-i18n="prod_potato_desc">内蒙古土豆，个大饱满</div>
+<div class="product-tag" data-i18n="prod_fresh">新鲜直达</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="contact" id="contact">
+<div class="container">
+<div class="section-title" data-i18n="contact_title">联系我们</div>
+<p class="section-sub" data-i18n="contact_sub">期待与您的合作</p>
+<div class="contact-grid">
+<div class="contact-card">
+<div class="contact-icon">&#128205;</div>
+<h3 data-i18n="contact_addr_title">公司地址</h3>
+<p data-i18n="contact_addr">中国上海市浦东新区张江路123号</p>
+</div>
+<div class="contact-card">
+<div class="contact-icon">&#128222;</div>
+<h3 data-i18n="contact_phone_title">联系电话</h3>
+<p><a href="tel:+862112345678" data-i18n="contact_phone">+86 21 1234 5678</a></p>
+</div>
+<div class="contact-card">
+<div class="contact-icon">&#9993;</div>
+<h3 data-i18n="contact_email_title">电子邮箱</h3>
+<p><a href="mailto:info@jiliuag.com" data-i18n="contact_email">info@jiliuag.com</a></p>
+</div>
+</div>
+</div>
+</section>
+<footer>
+<p><strong data-i18n="footer_name">上海激流农业发展有限公司</strong></p>
+<p data-i18n="footer_copy">&copy; 2026 Shanghai Jiliu Agricultural Development Co., Ltd. All Rights Reserved.</p>
+</footer><script>
+var I18N={
+zh:{name:"中文",dir:"ltr",nav_logo:"激流农业",nav_home:"首页",nav_about:"关于我们",nav_products:"产品",nav_contact:"联系我们",hero_title:"上海激流农业发展有限公司",hero_subtitle:"致力于优质农产品出口，将中国新鲜农产品带给全球市场",hero_cta:"探索我们的产品",about_title:"关于我们",about_sub:"品质源于自然，服务遍及全球",about_h3:"专业的农产品出口企业",about_p1:"上海激流农业发展有限公司成立于中国上海，是一家专注于新鲜农产品出口的企业。我们与国内优质种植基地建立长期合作，严格把控从种植到出口的全过程。",about_p2:"我们的产品涵盖大蒜、洋葱、胡萝卜、生姜、土豆等五大品类，品质稳定，供应充足，已出口至亚洲、欧洲、中东等多个国家和地区。",stat_lang:"支持语言",stat_countries:"出口国家\/地区",stat_tons:"年出口吨数",stat_years:"年行业经验",products_title:"产品展示",products_sub:"精选优质农产品，品质保证",prod_garlic_name:"大蒜",prod_garlic_desc:"山东金乡大蒜，品质上乘",prod_onion_name:"洋葱",prod_onion_desc:"河南原阳洋葱，品质稳定",prod_carrot_name:"胡萝卜",prod_carrot_desc:"寿光大棚胡萝卜，口感香甜",prod_ginger_name:"生姜",prod_ginger_desc:"云南罗平生姜，辛辣纯正",prod_potato_name:"土豆",prod_potato_desc:"内蒙古土豆，个大饱满",prod_fresh:"新鲜直达",contact_title:"联系我们",contact_sub:"期待与您的合作",contact_addr_title:"公司地址",contact_addr:"中国上海市浦东新区张江路123号",contact_phone_title:"联系电话",contact_email_title:"电子邮箱",footer_name:"上海激流农业发展有限公司",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."},
+en:{name:"English",dir:"ltr",nav_logo:"Jiliu Agriculture",nav_home:"Home",nav_about:"About Us",nav_products:"Products",nav_contact:"Contact",hero_title:"Shanghai Jiliu Agricultural Development Co., Ltd.",hero_subtitle:"Committed to exporting premium agricultural products, bringing China's freshest produce to global markets",hero_cta:"Explore Our Products",about_title:"About Us",about_sub:"Quality from nature, serving the world",about_h3:"Professional Agricultural Export Enterprise",about_p1:"Shanghai Jiliu Agricultural Development Co., Ltd., founded in Shanghai, China, is a company focused on the export of fresh agricultural products. We maintain long-term partnerships with top-quality domestic growing bases and strictly control every step from cultivation to export.",about_p2:"Our product range covers five major categories: garlic, onion, carrot, ginger, and potato. With stable quality and reliable supply, we have exported to numerous countries and regions across Asia, Europe, the Middle East, and beyond.",stat_lang:"Languages",stat_countries:"Export Countries",stat_tons:"Annual Tonnage",stat_years:"Years Experience",products_title:"Our Products",products_sub:"Selected premium produce, quality guaranteed",prod_garlic_name:"Garlic",prod_garlic_desc:"Premium Jinxiang garlic from Shandong",prod_onion_name:"Onion",prod_onion_desc:"Stable quality Yuanyang onion from Henan",prod_carrot_name:"Carrot",prod_carrot_desc:"Sweet greenhouse carrots from Shouguang",prod_ginger_name:"Ginger",prod_ginger_desc:"Pure and pungent Luoping ginger from Yunnan",prod_potato_name:"Potato",prod_potato_desc:"Plump and large potatoes from Inner Mongolia",prod_fresh:"Farm Fresh",contact_title:"Contact Us",contact_sub:"Looking forward to partnering with you",contact_addr_title:"Address",contact_addr:"No. 123 Zhangjiang Road, Pudong New Area, Shanghai, China",contact_phone_title:"Phone",contact_email_title:"Email",footer_name:"Shanghai Jiliu Agricultural Development Co., Ltd.",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."},
+ja:{name:"日本語",dir:"ltr",nav_logo:"ジール農業",nav_home:"ホーム",nav_about:"会社概要",nav_products:"製品",nav_contact:"お問い合わせ",hero_title:"上海激流農業発展有限公司",hero_subtitle:"良質な農産物の輸出に注力し、中国の新鮮な農産物を世界市場へ",hero_cta:"製品を見る",about_title:"会社概要",about_sub:"自然からの品質、世界へ",about_h3:"専門の農産物輸出企業",about_p1:"上海激流農業発展有限公司は中国・上海に設立され、新鮮な農産物の輸出に特化した企業です。国内の優良産地と長期的な提携関係を築き、栽培から輸出まで厳格に管理しています。",about_p2:"ニンニク、タマネギ、ニンジン、ショウガ、ジャガイモの5大カテゴリを扱い、品質安定・供給充足を実現。アジア、ヨーロッパ、中東など多くの国々と地域へ輸出しています。",stat_lang:"対応言語",stat_countries:"輸出国",stat_tons:"年間輸出量",stat_years:"年の経験",products_title:"製品紹介",products_sub:"厳選された良質な農産物、品質保証",prod_garlic_name:"ニンニク",prod_garlic_desc:"山東金郷産上質ニンニク",prod_onion_name:"タマネギ",prod_onion_desc:"河南原陽産安定品質タマネギ",prod_carrot_name:"ニンジン",prod_carrot_desc:"寿光大棚産甘味ニンジン",prod_ginger_name:"ショウガ",prod_ginger_desc:"雲南羅平産純正ショウガ",prod_potato_name:"ジャガイモ",prod_potato_desc:"内モンゴル産大粒ジャガイモ",prod_fresh:"新鮮直送",contact_title:"お問い合わせ",contact_sub:"ご協力を楽しみにしています",contact_addr_title:"住所",contact_addr:"中国上海市浦東新区張江路123号",contact_phone_title:"電話番号",contact_email_title:"メール",footer_name:"上海激流農業発展有限公司",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."},
+ko:{name:"한국어",dir:"ltr",nav_logo:"지류 농업",nav_home:"홈",nav_about:"회사 소개",nav_products:"제품",nav_contact:"연락처",hero_title:"상하이 지류 농업 발전 유한회사",hero_subtitle:"우수 농산물 수출에 전념하며 중국의 신선한 농산물을 세계 시장에 제공합니다",hero_cta:"제품 보기",about_title:"회사 소개",about_sub:"자연에서 온 품질, 전 세계를 서비스합니다",about_h3:"전문 농산물 수출 기업",about_p1:"상하이 지류 농업 발전 유한회사는 중국 상하이에 설립된 신선 농산물 수출 전문 기업입니다. 국내 우수 재배 기지와 장기 협력을 맺고 재배부터 수출까지 전 과정을 엄격히 관리합니다.",about_p2:"마늘, 양파, 당근, 생강, 감자 등 5대 품목을 다루며 안정된 품질과 충분한 공급을 실현했습니다. 아시아, 유럽, 중동 등 다수 국가와 지역에 수출하고 있습니다.",stat_lang:"지원 언어",stat_countries:"수출 국가",stat_tons:"연간 수출 톤수",stat_years:"년의 업계 경험",products_title:"제품 소개",products_sub:"엄선된 우수 농산물, 품질 보장",prod_garlic_name:"마늘",prod_garlic_desc:"산동 진향산 최상급 마늘",prod_onion_name:"양파",prod_onion_desc:"허난 원양산 안정 품질 양파",prod_carrot_name:"당근",prod_carrot_desc:"수광 온실당근, 달콤한 맛",prod_ginger_name:"생강",prod_ginger_desc:"윈난 로핑산 순정 생강",prod_potato_name:"감자",prod_potato_desc:"내몽골산 크고 알찬 감자",prod_fresh:"신선 직송",contact_title:"연락처",contact_sub:"협력 기대합니다",contact_addr_title:"주소",contact_addr:"중국 상하이시 푸둥신구 장장로 123번지",contact_phone_title:"전화번호",contact_email_title:"이메일",footer_name:"상하이 지류 농업 발전 유한회사",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."},
+es:{name:"Espa\u00f1ol",dir:"ltr",nav_logo:"Jiliu Agricultura",nav_home:"Inicio",nav_about:"Nosotros",nav_products:"Productos",nav_contact:"Contacto",hero_title:"Shanghai Jiliu Agricultural Development Co., Ltd.",hero_subtitle:"Comprometidos con la exportaci\u00f3n de productos agr\u00edcolas premium, llevando lo m\u00e1s fresco de China a los mercados globales",hero_cta:"Explorar Productos",about_title:"Sobre Nosotros",about_sub:"Calidad de la naturaleza, sirviendo al mundo",about_h3:"Empresa Profesional de Exportaci\u00f3n Agr\u00edcola",about_p1:"Shanghai Jiliu Agricultural Development Co., Ltd., con sede en Shangh\u00e1i, China, es una empresa dedicada a la exportaci\u00f3n de productos agr\u00edcolas frescos. Mantenemos asociaciones a largo plazo con bases de cultivo nacionales de primera calidad y controlamos rigurosamente cada etapa desde el cultivo hasta la exportaci\u00f3n.",about_p2:"Nuestro cat\u00e1logo abarca cinco categor\u00edas principales: ajo, cebolla, zanahoria, jengibre y patata. Con calidad estable y suministro confiable, hemos exportado a numerosos pa\u00edses y regiones de Asia, Europa, Medio Oriente y m\u00e1s all\u00e1.",stat_lang:"Idiomas",stat_countries:"Pa\u00edses de Exportaci\u00f3n",stat_tons:"Toneladas Anuales",stat_years:"A\u00f1os de Experiencia",products_title:"Nuestros Productos",products_sub:"Productos selectos de primera calidad, garant\u00eda de calidad",prod_garlic_name:"Ajo",prod_garlic_desc:"Ajo premium de Jinxiang, Shandong",prod_onion_name:"Cebolla",prod_onion_desc:"Cebolla de calidad estable de Yuanyang, Henan",prod_carrot_name:"Zanahoria",prod_carrot_desc:"Zanahoria de invernadero dulce de Shouguang",prod_ginger_name:"Jengibre",prod_ginger_desc:"Jengibre puro y picante de Luoping, Yunnan",prod_potato_name:"Patata",prod_potato_desc:"Patatas grandes y firmes de Mongolia Interior",prod_fresh:"Fresco del Campo",contact_title:"Cont\u00e1ctenos",contact_sub:"Esperamos su colaboraci\u00f3n",contact_addr_title:"Direcci\u00f3n",contact_addr:"No. 123 Calle Zhangjiang, Nueva Zona de Pudong, Shangh\u00e1i, China",contact_phone_title:"Tel\u00e9fono",contact_email_title:"Correo Electr\u00f3nico",footer_name:"Shanghai Jiliu Agricultural Development Co., Ltd.",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."},
+fr:{name:"Fran\u00e7ais",dir:"ltr",nav_logo:"Jiliu Agriculture",nav_home:"Accueil",nav_about:"\u00c0 propos",nav_products:"Produits",nav_contact:"Contact",hero_title:"Shanghai Jiliu Agricultural Development Co., Ltd.",hero_subtitle:"Engag\u00e9s dans l'exportation de produits agricoles premium, apportant les produits les plus frais de Chine aux march\u00e9s mondiaux",hero_cta:"Explorer Nos Produits",about_title:"\u00c0 Propos",about_sub:"Qualit\u00e9 venue de la nature, service mondial",about_h3:"Entreprise Professionnelle d'Exportation Agricole",about_p1:"Shanghai Jiliu Agricultural Development Co., Ltd., fond\u00e9e \u00e0 Shanghai, Chine, est une entreprise sp\u00e9cialis\u00e9e dans l'exportation de produits agricoles frais. Nous entretenons des partenariats durables avec les meilleures bases de production nationales et contr\u00f4lons rigoureusement chaque \u00e9tape.",about_p2:"Notre gamme couvre cinq cat\u00e9gories majeures: ail, oignon, carotte, gingembre et pomme de terre. Gr\u00e2ce \u00e0 une qualit\u00e9 stable et un approvisionnement fiable, nous avons export\u00e9 vers de nombreux pays et r\u00e9gions d'Asie, Europe, Moyen-Orient et au-del\u00e0.",stat_lang:"Langues",stat_countries:"Pays d'Exportation",stat_tons:"Tonnes Annuelles",stat_years:"Ann\u00e9es d'Exp\u00e9rience",products_title:"Nos Produits",products_sub:"S\u00e9lection de produits agricoles premium, qualit\u00e9 garantie",prod_garlic_name:"Ail",prod_garlic_desc:"Ail premium de Jinxiang, Shandong",prod_onion_name:"Oignon",prod_onion_desc:"Oignon de qualit\u00e9 stable de Yuanyang, Henan",prod_carrot_name:"Carotte",prod_carrot_desc:"Carotte de serre douce de Shouguang",prod_ginger_name:"Gingembre",prod_ginger_desc:"Gingembre pur et piquant de Luoping, Yunnan",prod_potato_name:"Pomme de Terre",prod_potato_desc:"Pommes de terre grosses et fermes de Mongolie Int\u00e9rieure",prod_fresh:"Frais du Champ",contact_title:"Contactez-Nous",contact_sub:"Nous esp\u00e9rons collaborer avec vous",contact_addr_title:"Adresse",contact_addr:"No. 123 Rue Zhangjiang, Nouvelle Zone de Pudong, Shanghai, Chine",contact_phone_title:"T\u00e9l\u00e9phone",contact_email_title:"E-mail",footer_name:"Shanghai Jiliu Agricultural Development Co., Ltd.",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."},
+de:{name:"Deutsch",dir:"ltr",nav_logo:"Jiliu Landwirtschaft",nav_home:"Startseite",nav_about:"\u00dcber uns",nav_products:"Produkte",nav_contact:"Kontakt",hero_title:"Shanghai Jiliu Agricultural Development Co., Ltd.",hero_subtitle:"Engagiert f\u00fcr den Export premium Agrarprodukte, bringt Chinas frischste Erzeugnisse auf den globalen M\u00e4rkten",hero_cta:"Unsere Produkte",about_title:"\u00dcber Uns",about_sub:"Qualit\u00e4t aus der Natur, Bedienung der Welt",about_h3:"Professionelles Agrarexportunternehmen",about_p1:"Shanghai Jiliu Agricultural Development Co., Ltd., mit Hauptsitz in Shanghai, China, ist ein Unternehmen, das sich auf den Export frischer Agrarprodukte spezialisiert hat. Wir pflegen langfristige Partnerschaften mit erstklassigen inl\u00e4ndischen Anbaubasen und kontrollieren streng jeden Schritt vom Anbau bis zur Export.",about_p2:"Unser Produktportfolio umfasst f\u00fcnf Hauptkategorien: Knoblauch, Zwiebel, Karotte, Ingwer und Kartoffel. Mit stabiler Qualit\u00e4t und zuverl\u00e4ssiger Lieferung haben wir in viele L\u00e4nder und Regionen Asiens, Europas, des Nahen Ostens und dari\u00fcber hinaus exportiert.",stat_lang:"Sprachen",stat_countries:"Exportl\u00e4nder",stat_tons:"J\u00e4hrliche Tonnage",stat_years:"Jahre Erfahrung",products_title:"Unsere Produkte",products_sub:"Ausgew\u00e4hlte Premium-Produkte, Qualit\u00e4tsgarantie",prod_garlic_name:"Knoblauch",prod_garlic_desc:"Premium-Knoblauch aus Jinxiang, Shandong",prod_onion_name:"Zwiebel",prod_onion_desc:"Stabil qualifizierte Zwiebel aus Yuanyang, Henan",prod_carrot_name:"Karotte",prod_carrot_desc:"S\u00fc\u00dfe Gew\u00e4chshaus-Karotte aus Shouguang",prod_ginger_name:"Ingwer",prod_ginger_desc:"Reiner und scharfer Ingwer aus Luoping, Yunnan",prod_potato_name:"Kartoffel",prod_potato_desc:"Gro\u00dfe und feste Kartoffeln aus der Inneren Mongolei",prod_fresh:"Frisch vom Feld",contact_title:"Kontaktieren Sie Uns",contact_sub:"Wir freuen uns auf die Zusammenarbeit",contact_addr_title:"Adresse",contact_addr:"Nr. 123 Zhangjiang Road, Neue Zone Pudong, Shanghai, China",contact_phone_title:"Telefon",contact_email_title:"E-Mail",footer_name:"Shanghai Jiliu Agricultural Development Co., Ltd.",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."},
+ru:{name:"\u0420\u0443\u0441\u0441\u043a\u0438\u0439",dir:"ltr",nav_logo:"Цзилюй Агро",nav_home:"Главная",nav_about:"О нас",nav_products:"Продукция",nav_contact:"Контакты",hero_title:"Shanghai Jiliu Agricultural Development Co., Ltd.",hero_subtitle:"Мы стремимся к экспорту премиальных сельскохозяйственных продуктов, доставляя самую свежую продукцию Китая на мировые рынки",hero_cta:"Наши Продукты",about_title:"О Нас",about_sub:"Качество от природы, обслуживание мира",about_h3:"Профессиональное предприятие сельскохозяйственного экспорта",about_p1:"Shanghai Jiliu Agricultural Development Co., Ltd., со штаб-квартирой в Шанхае, Китай, является компанией, специализирующейся на экспорте свежих сельскохозяйственных продуктов. Мы поддерживаем долгосрочные партнерства с лучшими внутренними базами выращивания и строго контролируем каждый этап от выращивания до экспорта.",about_p2:"Наш ассортимент охватывает пять основных категорий: чеснок, лук, морковь, имбирь и картофель. Благодаря стабильному качеству и надежным поставкам, мы экспортировали во многие страны и регионы Азии, Европы, Ближнего Востока и за их пределы.",stat_lang:"Языки",stat_countries:"Страны Экспорта",stat_tons:"Годовой Тоннаж",stat_years:"Лет Опыта",products_title:"Наша Продукция",products_sub:"Отборная премиальная продукция, гарантия качества",prod_garlic_name:"Чеснок",prod_garlic_desc:"Премиальный чеснок из Цзинсяна, Шаньдун",prod_onion_name:"Лук",prod_onion_desc:"Стабильное качество лука из Юаньяна, Хэнань",prod_carrot_name:"Морковь",prod_carrot_desc:"Сладкая тепличная морковь из Шоугуана",prod_ginger_name:"Имбирь",prod_ginger_desc:"Чистый и острый имбирь из Луопина, Юньнань",prod_potato_name:"Картофель",prod_potato_desc:"Крупный и качественный картофель из Внутренней Монголии",prod_fresh:"Свежий с Поля",contact_title:"Свяжитесь с Нами",contact_sub:"Мы надеемся на сотрудничество",contact_addr_title:"Адрес",contact_addr:"№ 123, ул. Чжанцзян, новый район Пудун, Шанхай, Китай",contact_phone_title:"Телефон",contact_email_title:"Электронная почта",footer_name:"Shanghai Jiliu Agricultural Development Co., Ltd.",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."},
+ar:{name:"\u0627\u0644\u0639\u0631\u0628\u064a\u0629",dir:"rtl",nav_logo:"جيليو الزراعة",nav_home:"الرئيسية",nav_about:"من نحن",nav_products:"المنتجات",nav_contact:"اتصل بنا",hero_title:"شanghai Jiliu Agricultural Development Co., Ltd.",hero_subtitle:"ملتزمون بتصدير المنتجات الزراعية الممتازة، ونحمل أحدث منتجات الصين الطازجة إلى الأسواق العالمية",hero_cta:"استكشف منتجاتنا",about_title:"من نحن",about_sub:"جودة من الطبيعة، خدمة العالم",about_h3:"شركة مهنية لتصدير المنتجات الزراعية",about_p1:"شanghai Jiliu Agricultural Development Co., Ltd., مقرها في شنغهاي، الصين، هي شركة متخصصة في تصدير المنتجات الزراعية الطازجة. نحتفظ بشراكات طويلة الأمد مع أفضل قواعد الزراعة المحلية ونتحكم بشدة في كل خطوة من الزراعة إلى التصدير.",about_p2:"يغطي مجموعتنا الخمسة فئات رئيسية: الثوم والبصل والجزر والزنجبيل والبطاطس. بفضل الجودة المستقرة والإمداد الموثوق، قمنا بالتصدير إلى العديد من البلدان والمناطق في آسيا وأوروبا والشرق الأوسط وما بعده.",stat_lang:"اللغات",stat_countries:"دول التصدير",stat_tons:"الطون السنوي",stat_years:"سنوات الخبرة",products_title:"منتجاتنا",products_sub:"منتجات ممتازة مختارة، ضمان الجودة",prod_garlic_name:"ثوم",prod_garlic_desc:"ثوم ممتاز من جينشيانغ، شاندونغ",prod_onion_name:"بصل",prod_onion_desc:"بصل مستقر الجودة من يوانيانغ، خنان",prod_carrot_name:"جزر",prod_carrot_desc:"جزر دافئة حلوة من شووقوانغ",prod_ginger_name:"زنجبيل",prod_ginger_desc:"زنجبيل نقي وحر من لوبونغ، يونان",prod_potato_name:"بطاطس",prod_potato_desc:"بطاطس كبيرة وكبيرة من منغوليا الداخلية",prod_fresh:"طازج من الحقل",contact_title:"اتصل بنا",contact_sub:"نتطلع إلى التعاون",contact_addr_title:"العنوان",contact_addr:"رقم 123 شارع تشانغجيانغ، منطقة بودونغ الجديدة، شنغهاي، الصين",contact_phone_title:"الهاتف",contact_email_title:"البريد الإلكتروني",footer_name:"Shanghai Jiliu Agricultural Development Co., Ltd.",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."},
+pt:{name:"Portugu\u00eas",dir:"ltr",nav_logo:"Jiliu Agricultura",nav_home:"In\u00edcio",nav_about:"Sobre N\u00f3s",nav_products:"Produtos",nav_contact:"Contato",hero_title:"Shanghai Jiliu Agricultural Development Co., Ltd.",hero_subtitle:"Comprometidos com a exporta\u00e7\u00e3o de produtos agr\u00edcolas premium, trazendo as产 mais frescos da China para mercados globais",hero_cta:"Explorar Nossos Produtos",about_title:"Sobre N\u00f3s",about_sub:"Qualidade da natureza, servindo o mundo",about_h3:"Empresa Profissional de Exporta\u00e7\u00e3o Agr\u00edcola",about_p1:"Shanghai Jiliu Agricultural Development Co., Ltd., com sede em Xangai, China, \u00e9 uma empresa especializada na exporta\u00e7\u00e3o de produtos agr\u00edcolas frescos. Mantemos parcerias de longo prazo com as melhores bases de cultivo dom\u00e9sticas e controlamos rigorosamente cada etapa do cultivo \u00e0 exporta\u00e7\u00e3o.",about_p2:"Nosso portf\u00f3lio abrange cinco categorias principais: alho, cebola, cenoura, gengibre e batata. Com qualidade est\u00e1vel e fornecimento confi\u00e1vel, exportamos para muitos pa\u00edses e regi\u00f5es da \u00c1sia, Europa, Oriente M\u00e9dio e al\u00e9m.",stat_lang:"Idiomas",stat_countries:"Pa\u00edses de Exporta\u00e7\u00e3o",stat_tons:"Toneladas Anuais",stat_years:"Anos de Experi\u00eancia",products_title:"Nossos Produtos",products_sub:"Produtos premium selecionados, qualidade garantida",prod_garlic_name:"Alho",prod_garlic_desc:"Alho premium de Jinxiang, Shandong",prod_onion_name:"Cebola",prod_onion_desc:"Cebola de qualidade est\u00e1vel de Yuanyang, Henan",prod_carrot_name:"Cenoura",prod_carrot_desc:"Cenoura doce de estufa de Shouguang",prod_ginger_name:"Gengibre",prod_ginger_desc:"Gengibre puro e picante de Luoping, Yunnan",prod_potato_name:"Batata",prod_potato_desc:"Batatas grandes e firmes da Mong\u00f3lia Interior",prod_fresh:"Fresco do Campo",contact_title:"Entre em Contato",contact_sub:"Esperamos sua colabora\u00e7\u00e3o",contact_addr_title:"Endere\u00e7o",contact_addr:"No. 123 Rua Zhangjiang, Nova \u00c1rea de Pudong, Xangai, China",contact_phone_title:"Telefone",contact_email_title:"E-mail",footer_name:"Shanghai Jiliu Agricultural Development Co., Ltd.",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."},
+th:{name:"\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22",dir:"ltr",nav_logo:"จیلیว เกษตรกรรม",nav_home:"หน้าแรก",nav_about:"เกี่ยวกับเรา",nav_products:"สินค้า",nav_contact:"ติดต่อเรา",hero_title:"Shanghai Jiliu Agricultural Development Co., Ltd.",hero_subtitle:"มุ่งมั่นส่งออกผลิตภัณฑ์การเกษตรพรีเมียม นำเสนอผลิตภัณฑ์สดใหม่จากจีนสู่ตลาดโลก",hero_cta:"สำรวจสินค้าของเรา",about_title:"เกี่ยวกับเรา",about_sub:"คุณภาพจากธรรมชาติ บริการทั่วโลก",about_h3:"บริษัทส่งออกผลิตภัณฑ์การเกษตรระดับมืออาชีพ",about_p1:"Shanghai Jiliu Agricultural Development Co., Ltd. สำนักงานใหญ่ในเซี่ยงไฮ้ จีน เป็นบริษัทที่เชี่ยวชาญในการส่งออกผลิตภัณฑ์การเกษตรสดใหม่ เรารักษาพันธมิตรระยะยาวกับฐานการปลูกชั้นนำภายในประเทศและควบคุมอย่างเข้มงวดทุกขั้นตอนตั้งแต่การปลูกจนถึงการส่งออก",about_p2:"ผลิตภัณฑ์ของเราครอบคลุมห้าหมวดหมู่หลัก: กระเทียม หัวหอม แครอท ขิง และมันฝรั่ง ด้วยคุณภาพคงที่และการจัดส่งที่เชื่อถือได้ เรานำออกส่งออกไปยังหลายประเทศและภูมิภาคในเอเชีย ยุโรป ตะวันออกกลาง และ beyond",stat_lang:"ภาษา",stat_countries:"ประเทศที่ส่งออกไป",stat_tons:"น้ำหนักรายปี",stat_years:"ปีประสบการณ์",products_title:"สินค้าของเรา",products_sub:"ผลิตภัณฑ์พรีเมียมที่คัดสรร รับประกันคุณภาพ",prod_garlic_name:"กระเทียม",prod_garlic_desc:"กระเทียมพรีเมียมจากจินเซียง ชานตง",prod_onion_name:"หัวหอม",prod_onion_desc:"หัวหอมคุณภาพคงที่จากยวนหยาง เหอหนาน",prod_carrot_name:"แครอท",prod_carrot_desc:"แครอทในโรงเรือนหวานจากโซ่วกวง",prod_ginger_name:"ขิง",prod_ginger_desc:"ขิงบริสุทธิ์และเผ็ดจากหลัวผิง หยุนหนาน",prod_potato_name:"มันฝรั่ง",prod_potato_desc:"มันฝรั่งใหญ่และแน่นจากมองโกเลียใน",prod_fresh:"สดจากไร่",contact_title:"ติดต่อเรา",contact_sub:"ยินดีร่วมมือกับคุณ",contact_addr_title:"ที่อยู่",contact_addr:"เลขที่ 123 ถนนจางเจียง เขตใหม่ผู่ตง เซี่ยงไฮ้ จีน",contact_phone_title:"โทรศัพท์",contact_email_title:"อีเมล",footer_name:"Shanghai Jiliu Agricultural Development Co., Ltd.",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."},
+vi:{name:"Ti\u1ebfng Vi\u1ec7t",dir:"ltr",nav_logo:"Jiliu Nông nghiệp",nav_home:"Trang chủ",nav_about:"Giới thiệu",nav_products:"Sản phẩm",nav_contact:"Liên hệ",hero_title:"Shanghai Jiliu Agricultural Development Co., Ltd.",hero_subtitle:"Cam kết xuất khẩu nông sản cao cấp, mang nông sản tươi mới nhất của Trung Quốc đến thị trường toàn cầu",hero_cta:"Khám phá sản phẩm",about_title:"Về chúng tôi",about_sub:"Chất lượng từ thiên nhiên, phục vụ thế giới",about_h3:"Doanh nghiệp xuất khẩu nông sản chuyên nghiệp",about_p1:"Shanghai Jiliu Agricultural Development Co., Ltd., trụ sở tại Thượng Hải, Trung Quốc, là công ty chuyên xuất khẩu nông sản tươi. Chúng tôi duy trì quan hệ đối tác lâu dài với các cơ sở canh tác trong nước hàng đầu và kiểm soát chặt chẽ mọi bước từ trồng trọt đến xuất khẩu.",about_p2:"Danh mục sản phẩm của chúng tôi bao gồm năm loại chính: tỏi, hành tây, cà rốt, gừng và khoai tây. Với chất lượng ổn định và nguồn cung đáng tin cậy, chúng tôi đã xuất khẩu sang nhiều quốc gia và khu vực ở Châu Á, Châu Âu, Trung Đông và xa hơn nữa.",stat_lang:"Ngôn ngữ",stat_countries:"Quốc gia xuất khẩu",stat_tons:"Số tấn hàng năm",stat_years:"Năm kinh nghiệm",products_title:"Sản phẩm của chúng tôi",products_sub:"Sản phẩm cao cấp được chọn lọc, đảm bảo chất lượng",prod_garlic_name:"Tỏi",prod_garlic_desc:"Tỏi premium từ Kim Hương, Sơn Đông",prod_onion_name:"Hành tây",prod_onion_desc:"Hành tây chất lượng ổn định từ Nguyên Dương, Hà Nam",prod_carrot_name:"Cà rốt",prod_carrot_desc:"Cà rốt nhà kính ngọt từ Thọ Quang",prod_ginger_name:"Gừng",prod_ginger_desc:"Gừng tinh khiết và cay từ La Bình, Vân Nam",prod_potato_name:"Khoai tây",prod_potato_desc:"Khoai tây to và chắc từ Nội Mông",prod_fresh:"Tươi từ đồng ruộng",contact_title:"Liên hệ",contact_sub:"Mong được hợp tác với bạn",contact_addr_title:"Địa chỉ",contact_addr:"Số 123 đường Trương Giang, khu mới Phố Đông, Thượng Hải, Trung Quốc",contact_phone_title:"Điện thoại",contact_email_title:"Email",footer_name:"Shanghai Jiliu Agricultural Development Co., Ltd.",footer_copy:"Copyright 2026 Shanghai Jiliu Agricultural Development Co., Ltd."}
+};
+
+var LANG_KEYS=Object.keys(I18N);
+var langNames={zh:"中文",en:"English",ja:"日本語",ko:"한국어",es:"Español",fr:"Français",de:"Deutsch",ru:"Русский",ar:"العربية",pt:"Português",th:"ไทย",vi:"Tiếng Việt"};
+var langEmojis={zh:"\ud83c\udde8\ud83c\uddf3",en:"\ud83c\uddfa\ud83c\uddf8",ja:"\ud83c\uddef\ud83c\uddf5",ko:"\ud83c\uddf0\ud83c\uddf7",es:"\ud83c\uddea\ud83c\uddf8",fr:"\ud83c\uddeb\ud83c\uddf7",de:"\ud83c\udde9\ud83c\uddea",ru:"\ud83c\uddf7\ud83c\uddfa",ar:"\ud83c\udde6\ud83c\uddea",pt:"\ud83c\uddf5\ud83c\uddf9",th:"\ud83c\uddf9\ud83c\udded",vi:"\ud83c\uddfb\ud83c\uddf3"};
+
+function setLang(code){
+  if(!I18N[code])return;
+  var L=I18N[code];
+  document.documentElement.lang=code;
+  document.documentElement.dir=L.dir;
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var key=el.getAttribute("data-i18n");
+    if(L[key]!=null){
+      if(el.tagName==="A"&&el.getAttribute("href")&&key.startsWith("contact")){
+        el.textContent=L[key];
+      } else {
+        el.textContent=L[key];
+      }
+    }
+  });
+  document.getElementById("currentLang").textContent=L.name;
+  document.querySelectorAll(".lang-option").forEach(function(opt){
+    opt.classList.toggle("active",opt.dataset.lang===code);
+  });
+  localStorage.setItem("jiliu_lang",code);
+}
+
+function buildLangDropdown(){
+  var dd=document.getElementById("langDropdown");
+  dd.innerHTML="";
+  LANG_KEYS.forEach(function(code){
+    var opt=document.createElement("div");
+    opt.className="lang-option"+(localStorage.getItem("jiliu_lang")===code?" active":"");
+    opt.dataset.lang=code;
+    opt.textContent=langNames[code]+" "+langEmojis[code];
+    opt.onclick=function(){setLang(code);dd.classList.remove("show")};
+    dd.appendChild(opt);
+  });
+}
+
+function toggleLangDropdown(){
+  document.getElementById("langDropdown").classList.toggle("show");
+}
+
+document.addEventListener("click",function(e){
+  if(!e.target.closest(".lang-switcher")){
+    document.getElementById("langDropdown").classList.remove("show");
+  }
+});
+
+document.addEventListener("DOMContentLoaded",function(){
+  buildLangDropdown();
+  var saved=localStorage.getItem("jiliu_lang");
+  if(saved&&I18N[saved]){
+    setLang(saved);
+  }
+});
+</script>
+</body>
+</html>
